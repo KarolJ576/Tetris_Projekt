@@ -138,7 +138,6 @@ void Game::run() {
                 else {
                     if (event.key.code == sf::Keyboard::Escape) {
                         window.close();
-                        AppState::Exit;
                     }
                     if (event.key.code == sf::Keyboard::P)
                         paused = !paused;
