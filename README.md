@@ -18,4 +18,4 @@ Gra tetris przy użyciu biblioteki SFML
 git clone https://github.com/KarolJ576/Tetris_Projekt.git
 cd Tetris_Projekt
 ```
-Do skompilowania projektu potrzbny jest środowisko dla c++ z wsparciem dla Cmake
+Do skompilowania projektu potrzbny jest środowisko dla c++ z wsparciem dla CmMke
