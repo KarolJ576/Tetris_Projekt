@@ -23,15 +23,18 @@ void App::run() {
 }
 
 void App::showMainMenu() {
-    MainMenu menu(videoMode);
-    auto result = menu.run();
-    if (!result.first) {
-        // ESC - zakończ program
-        state = AppState::Exit;
-        return;
+    
+    MainMenu menu(videoMode, db);
+    auto [playChosen, mode, name] = menu.run();
+
+    if (playChosen) {
+        playerName = name; 
+        videoMode = mode;  
+        state = AppState::LevelSelect; 
     }
-    videoMode = result.second;
-    state = AppState::LevelSelect;
+    else {
+        state = AppState::Exit;
+    }
 }
 
 void App::showLevelSelect() {
@@ -46,7 +49,8 @@ void App::showLevelSelect() {
 }
 
 void App::showGame() {
-    Game game(videoMode, chosenLevel);
+    Game game(videoMode, chosenLevel, playerName); 
     game.run();
+
     state = AppState::MainMenu;
 }

@@ -8,8 +8,11 @@
 #include "Utils.h"
 #include <MainMenu.h>
 #include <App.h>
+#include "DatabaseManager.h"
 
-Game::Game(sf::VideoMode mode, int level) : startLevel(level) {
+
+Game::Game(sf::VideoMode mode, int level, const std::string& playerName)
+    : videoMode(mode), startLevel(level), playerName(playerName) {
     window.create(mode, "Tetris");
     sf::Font font;
     if (!font.loadFromFile("arial.ttf")) return;
@@ -124,7 +127,11 @@ void Game::run() {
             if (event.type == sf::Event::KeyPressed) {
                 if (gameOver) {
                     if (event.key.code == sf::Keyboard::Escape)
+                    {
+                        static DatabaseManager db;
+                        db.saveScore(playerName, score, level);
                         window.close();
+                    }
                     else if (event.key.code == sf::Keyboard::R) {
                         field.reset();
                         score = linesCleared = 0;
