@@ -20,15 +20,28 @@ int Field::clearLines(int& score, int& linesCleared, int& level) {
             if (data[i][j]) count++;
             data[k][j] = data[i][j];
         }
-        if (count < 10) k--;
+        if (count < 10) {
+            k--;
+        }
         else {
             lines++;
-            linesCleared++;
-            score += 100;
-            if (linesCleared % 10 == 0) {
-                level++;
-            }
         }
     }
+
+    if (lines > 0) {
+        linesCleared += lines;
+        if (lines == 4) {
+            score += 1000; 
+        }
+        else {
+            score += lines * 100;
+        }
+
+        // Podnosimy level co 10 linii
+        if (linesCleared / 10 > (linesCleared - lines) / 10) {
+            level++;
+        }
+    }
+
     return lines;
 }
